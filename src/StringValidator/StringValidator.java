@@ -14,39 +14,56 @@ import java.util.regex.Matcher;
  */
 public class StringValidator {
     private String text;
+    private String feedback;
     
     public StringValidator(String text){
         this.text = text;
+        feedback = "";
     }
     
     public StringValidator(){
         text = "The quick brown fox said “hello Mr lazy dog”.";
+        feedback = "";
     }
     
     public void SetText(String text){
         this.text = text;
     }
     
+    public String GetFeedback(){
+        return this.feedback;
+    }
+    
     //Returns true if string provided satisfies all rules.
     public boolean ValidateText(){
         if(!RuleOne(text)){
+            feedback = "Sentence Invalid. Rule 1 broken: \"Sentence must start with a capital letter\".";
             return false;
         }
         
         if(!RuleTwo(text)){
+            feedback = "Sentence Invalid. Rule 2 broken: \"Sentence must have even number of quotation marks\".";
             return false;
         }
         
         if(!RuleThree(text)){
+            feedback = "Sentence Invalid. Rule 3 broken: \"Sentence must end with a period character\".";
             return false;
         }
         
         if(!RuleFour(text)){
+            feedback = "Sentence Invalid. Rule 4 broken: \"Sentence must not have more than one period character\".";
             return false;
         }
         
         //Can just return the result of last rule as everything counts on it passing or not.
-        return RuleFive(text);
+        if(!RuleFive(text)){
+            feedback = "Sentence Invalid. Rule 5 broken: \"Numbers below 13 must be spelt (one, two, etc)\".";
+            return false;
+        }else{
+            feedback = "";
+            return true;
+        }
     }
     
     //Checks that string provided starts with capital letter.

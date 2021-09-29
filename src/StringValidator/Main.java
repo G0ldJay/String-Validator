@@ -30,7 +30,11 @@ public class Main {
             
                 System.out.println("\nInput: " + text);
                 System.out.println("Valid Sentence: " + sv.ValidateText());
-            
+                
+                if(!sv.ValidateText()){
+                    System.out.println(sv.GetFeedback());
+                }
+                
                 System.out.println("\nInput Sentence (Type \"esc\" to exit:");
                 text = sc.nextLine();
             }while(!text.equals("esc")); 
